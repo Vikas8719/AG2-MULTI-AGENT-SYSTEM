@@ -7,10 +7,19 @@ import sys
 from pathlib import Path
 
 
+
 # Add project root to path if not present
 project_root = Path(__file__).parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
+
+# Fix for SQLite version on Streamlit Cloud (ChromaDB requires sqlite3 >= 3.35.0)
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
 
 
 # Import and run the Streamlit app
