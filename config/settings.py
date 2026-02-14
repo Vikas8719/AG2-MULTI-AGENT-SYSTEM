@@ -48,8 +48,8 @@ class AG2Settings(BaseSettings):
 class GitHubSettings(BaseSettings):
     """GitHub Integration Configuration"""
     
-    github_token: str = Field(..., description="GitHub Personal Access Token")
-    github_username: str = Field(..., description="GitHub Username")
+    github_token: Optional[str] = Field(None, description="GitHub Personal Access Token")
+    github_username: Optional[str] = Field(None, description="GitHub Username")
     github_repo_prefix: str = Field("ag2-generated", description="Repository Prefix")
     github_default_branch: str = Field("main", description="Default Branch")
     github_org: Optional[str] = Field(None, description="GitHub Organization")
@@ -111,8 +111,8 @@ class DockerSettings(BaseSettings):
     """Docker Configuration"""
     
     docker_registry: str = Field("docker.io")
-    docker_username: str = Field(..., description="Docker Registry Username")
-    docker_password: str = Field(..., description="Docker Registry Password")
+    docker_username: Optional[str] = Field(None, description="Docker Registry Username")
+    docker_password: Optional[str] = Field(None, description="Docker Registry Password")
     docker_email: Optional[str] = None
 
     model_config = SettingsConfigDict(env_prefix="", case_sensitive=False)
@@ -180,9 +180,9 @@ class DatabaseSettings(BaseSettings):
 class SecuritySettings(BaseSettings):
     """Security Configuration"""
     
-    secret_key: str = Field(..., min_length=32)
-    encryption_key: str = Field(..., min_length=32)
-    jwt_secret: str = Field(..., min_length=32)
+    secret_key: Optional[str] = Field(None, min_length=32)
+    encryption_key: Optional[str] = Field(None, min_length=32)
+    jwt_secret: Optional[str] = Field(None, min_length=32)
     jwt_algorithm: str = "HS256"
     jwt_expiration: int = 3600
 
