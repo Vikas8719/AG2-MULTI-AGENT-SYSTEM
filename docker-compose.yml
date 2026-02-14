@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  ag2-system:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./projects:/app/projects
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    restart: unless-stopped
